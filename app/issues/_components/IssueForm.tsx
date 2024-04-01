@@ -1,25 +1,24 @@
 'use client';
 import ErrorMessage from '@/app/components/ErrorMessage';
 import Spinner from '@/app/components/Spinner';
-import { createIssueSchema } from '@/app/validationSchema';
+import { issueSchema } from '@/app/validationSchema';
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Issue } from '@prisma/client';
 import { Button, Callout, TextField } from '@radix-ui/themes';
 import axios from 'axios';
 import "easymde/dist/easymde.min.css";
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
+import SimpleMDE from 'react-simplemde-editor';
 import { z } from 'zod';
 
+// const SimpleMDE = dynamic(
+//   () => import('react-simplemde-editor'),
+//   { ssr: false }
+// );
 
-const SimpleMDE = dynamic(
-  () => import('react-simplemde-editor'),
-  { ssr: false }
-);
-
-type IssueFormDatat = z.infer<typeof createIssueSchema>;
+type IssueFormData = z.infer<typeof issueSchema>;
 
 // interface Props {
 //   issue?: Issue;
@@ -28,8 +27,8 @@ type IssueFormDatat = z.infer<typeof createIssueSchema>;
 const IssueForm = ({ issue }: { issue?: Issue; }) => {
   const router = useRouter();
 
-  const { register, control, handleSubmit, formState: { errors } } = useForm<IssueFormDatat>({
-    resolver: zodResolver(createIssueSchema)
+  const { register, control, handleSubmit, formState: { errors } } = useForm<IssueFormData>({
+    resolver: zodResolver(issueSchema)
   });
   // console.log(register('title'))
 
@@ -38,9 +37,18 @@ const IssueForm = ({ issue }: { issue?: Issue; }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
+      let result;
       setSubmiting(true);
-      await axios.post('/api/issues', data);
+      if (issue) {
+        result = await axios.patch('/api/issues/' + issue.id, data);
+        console.log("patch ------->", result);
+      }
+      else {
+        result = await axios.post('/api/issues/', data);
+        console.log("new issue ------->", result);
+      }
       router.push('/issues');
+      // router.refresh()
     } catch (error) {
       // console.log(error);
       setSubmiting(false);
@@ -67,7 +75,7 @@ const IssueForm = ({ issue }: { issue?: Issue; }) => {
             <SimpleMDE placeholder='Description' {...field} />
           } />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-        <Button disabled={isSubmiting}>Submit New Issue {isSubmiting && <Spinner />}</Button>
+        <Button disabled={isSubmiting}>{issue ? 'Update Issue' : 'Submit New Issue'}{" "}{isSubmiting && <Spinner />}</Button>
       </form>
     </div>
   );
