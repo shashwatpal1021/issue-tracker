@@ -19,7 +19,7 @@ const SimpleMDE = dynamic(
   { ssr: false }
 );
 
-type IssueFormDatat = z.infer<typeof issueSchema>;
+type IssueFormData = z.infer<typeof issueSchema>;
 
 // interface Props {
 //   issue?: Issue;
@@ -28,7 +28,7 @@ type IssueFormDatat = z.infer<typeof issueSchema>;
 const IssueForm = ({ issue }: { issue?: Issue; }) => {
   const router = useRouter();
 
-  const { register, control, handleSubmit, formState: { errors } } = useForm<IssueFormDatat>({
+  const { register, control, handleSubmit, formState: { errors } } = useForm<IssueFormData>({
     resolver: zodResolver(issueSchema)
   });
   // console.log(register('title'))
@@ -38,8 +38,16 @@ const IssueForm = ({ issue }: { issue?: Issue; }) => {
 
   const onSubmit = handleSubmit(async (data) => {
     try {
+      let result;
       setSubmiting(true);
-      await axios.post('/api/issues', data);
+      if (issue) {
+        result = await axios.patch('/api/issues/' + issue.id, data);
+        console.log("patch ------->", result);
+      }
+      else {
+        result = await axios.post('/api/issues/', data);
+        console.log("new issue ------->", result);
+      }
       router.push('/issues');
     } catch (error) {
       // console.log(error);
@@ -67,7 +75,7 @@ const IssueForm = ({ issue }: { issue?: Issue; }) => {
             <SimpleMDE placeholder='Description' {...field} />
           } />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-        <Button disabled={isSubmiting}>Submit New Issue {isSubmiting && <Spinner />}</Button>
+        <Button disabled={isSubmiting}>{issue ? 'Update Issue' : 'Submit New Issue'}{" "}{isSubmiting && <Spinner />}</Button>
       </form>
     </div>
   );
