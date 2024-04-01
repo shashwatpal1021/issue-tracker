@@ -49,6 +49,7 @@ const IssueForm = ({ issue }: { issue?: Issue; }) => {
         console.log("new issue ------->", result);
       }
       router.push('/issues');
+      // router.refresh()
     } catch (error) {
       // console.log(error);
       setSubmiting(false);
