@@ -31,6 +31,7 @@ const DeleteIssueButton = ({ issueId }: { issueId: number; }) => {
                 router.push('/issues');
                 router.refresh()
               }
+
             }>
               Delete Issue
             </Button>
