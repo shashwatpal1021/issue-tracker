@@ -32,9 +32,11 @@ const NavBar = () => {
 const AuthStatus = () => {
   const { status, data: session } = useSession();
   if (status === "loading") return <Skeleton width={'5rem'} />;
-  if (status === "unauthenticated")
+  if (status === "unauthenticated") {
     return (<Link className="nav-link" href={'/api/auth/signin'}>Login</Link>);
-  <Box>
+  }
+  return (
+    <Box>
     <DropdownMenu.Root>
       <DropdownMenu.Trigger>
         <Avatar src={session!.user!.image!} fallback="?"
@@ -55,7 +57,8 @@ const AuthStatus = () => {
         </DropdownMenu.Item>
       </DropdownMenu.Content>
     </DropdownMenu.Root>
-  </Box>;
+    </Box>
+  );
 };
 
 const NavLinks = () => {
