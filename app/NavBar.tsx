@@ -1,5 +1,4 @@
 "use client";
-
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import React from "react";
@@ -26,8 +25,6 @@ const NavBar = () => {
     </nav>
   );
 };
-
-
 
 const AuthStatus = () => {
   const { status, data: session } = useSession();
@@ -92,6 +89,5 @@ const NavLinks = () => {
     </ul>
   );
 };
-
 
 export default NavBar;

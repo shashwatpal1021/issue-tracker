@@ -10,4 +10,4 @@ const AuthProvider = ({children}:PropsWithChildren) => {
   )
 }
 
-export default AuthProvider
+export default AuthProvider;
