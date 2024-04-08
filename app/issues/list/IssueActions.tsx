@@ -5,10 +5,11 @@ import IssueStatusFilter from "./IssueStatusFilter";
 const IssueActions = () => {
   return (
     <Flex className="mb-5">
-      <IssueStatusFilter />
-      <Button>
+      <h1>hello</h1>
+      {/* <IssueStatusFilter /> */}
+      {/* <Button>
         <Link href={"/issues/new"}>New Issue</Link>
-      </Button>
+      </Button> */}
     </Flex>
   );
 };

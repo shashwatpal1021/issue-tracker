@@ -1,30 +1,33 @@
 "use client";
+
 import { Status } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import React from "react";
 
 const statuses: {
   label: string;
-  values?: Status;
+  value?: Status;
 }[] = [
-  { label: "All" },
-  { label: "Open", values: "OPEN" },
-  { label: "In Progress", values: "IN_PROGRESS" },
-  { label: "Closed", values: "CLOSED" },
-];
+    { label: "All" },
+    { label: "Open", value: "OPEN" },
+    { label: "In Progress", value: "IN_PROGRESS" },
+    { label: "Closed", value: "CLOSED" },
+  ];
 const IssueStatusFilter = () => {
   return (
-    <Select.Root>
-      {/* <Select.Label>Filter by status</Select.Label> */}
-      <Select.Trigger placeholder="Filter by status..." />
-      <Select.Content>
-        {statuses.map((status) => (
-          <Select.Item key={status.label} value={status.values || ""}>
-            {status.label}
-          </Select.Item>
-        ))}
-      </Select.Content>
-    </Select.Root>
+    <>
+      <Select.Root>
+        {/* <Select.Label>Filter by status</Select.Label> */}
+        <Select.Trigger />
+        <Select.Content>
+          {statuses.map((status) => (
+            <Select.Item key={status.value} value={status.value || ""}>
+              {status.label}
+            </Select.Item>
+          ))}
+        </Select.Content>
+      </Select.Root>
+    </>
   );
 };
 

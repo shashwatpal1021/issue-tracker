@@ -39,7 +39,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
         // console.log("------------>",result)
       }}
     >
-      <Select.Trigger placeholder="Assign.." />
+      <Select.Trigger />
       <Select.Content>
         <Select.Group>
           <Select.Label>Suggestions</Select.Label>
