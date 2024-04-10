@@ -2,19 +2,28 @@ import prisma from "@/prisma/client";
 import { Button, Flex, Table } from "@radix-ui/themes";
 import { IssueStatusBadge, Link } from "../../components";
 import IssueStatusFilter from "./IssueStatusFilter";
+import { Status } from "@prisma/client";
+import IssueActions from "./IssueActions";
 // import delay from 'delay';
 
-const IssuesPage = async () => {
-  const issues = await prisma.issue.findMany();
+interface Props {
+  searchParams: { status: Status };
+}
+
+const IssuesPage = async ({ searchParams }: Props) => {
+  const statuses = Object.values(Status);
+  const status = statuses.includes(searchParams.status)
+    ? searchParams.status
+    : undefined;
+  const issues = await prisma.issue.findMany({
+    where: {
+      status,
+    },
+  });
   // await delay(2000);
   return (
-    <div>
-      <Flex mb="5" justify="between">
-        <IssueStatusFilter />
-        <Button>
-          <Link href={"/issues/new"}>New Issue</Link>
-        </Button>
-      </Flex>
+    <>
+      <IssueActions />
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
@@ -46,7 +55,7 @@ const IssuesPage = async () => {
           ))}
         </Table.Body>
       </Table.Root>
-    </div>
+    </>
   );
 };
 
