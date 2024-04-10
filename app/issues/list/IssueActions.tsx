@@ -4,12 +4,12 @@ import IssueStatusFilter from "./IssueStatusFilter";
 
 const IssueActions = () => {
   return (
-    <Flex className="mb-5">
-      <h1>hello</h1>
-      {/* <IssueStatusFilter /> */}
-      {/* <Button>
+    <Flex className="mb-5" justify={"between"}>
+      {/* {console.log("IssueActions")} */}
+      <IssueStatusFilter/>
+      <Button>
         <Link href={"/issues/new"}>New Issue</Link>
-      </Button> */}
+      </Button>
     </Flex>
   );
 };
