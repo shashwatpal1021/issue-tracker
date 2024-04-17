@@ -1,5 +1,7 @@
 ## Getting Started
 
+deployed in vercel link : https://issue-tracker-ten-gray.vercel.app/
+
 First, run the development server:
 
 ```bash
