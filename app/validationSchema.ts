@@ -6,6 +6,7 @@ export const issueSchema = z.object({
     .string()
     .min(1, { message: "Description is required" })
     .max(65535),
+  status: z.string().optional(),
 });
 
 export const patchIssueSchema = z.object({
@@ -25,4 +26,5 @@ export const patchIssueSchema = z.object({
     .max(255)
     .optional()
     .nullable(),
+  status: z.string().optional(),
 });

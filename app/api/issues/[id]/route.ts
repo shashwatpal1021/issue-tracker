@@ -1,3 +1,4 @@
+
 import authOptions from "@/app/auth/authOption";
 import { patchIssueSchema } from "@/app/validationSchema";
 import prisma from "@/prisma/client";
@@ -25,7 +26,7 @@ export async function PATCH(
       status: 400,
     });
   }
-  const { assignedToUserId, title, description } = body;
+  const { assignedToUserId, title, description, status } = body;
   if (assignedToUserId) {
     const user = await prisma.user.findUnique({
       where: {
@@ -53,6 +54,7 @@ export async function PATCH(
       title,
       description,
       assignedToUserId,
+      status
     },
   });
   return NextResponse.json(updatedIssue, { status: 200 });
