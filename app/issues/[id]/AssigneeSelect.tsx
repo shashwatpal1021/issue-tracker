@@ -9,7 +9,7 @@ import toast, { Toaster } from "react-hot-toast";
 
 const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   const { data: users, error, isLoading } = useUsers();
-const router = useRouter();
+  const router = useRouter();
   if (isLoading) return <Skeleton />;
 
   if (error) return null;
@@ -23,15 +23,15 @@ const router = useRouter();
   //   fetchUsers();
   // }, []);
 
-  const assignIssue = async(userId: string) => {
+  const assignIssue = async (userId: string) => {
     await axios
       .patch("/api/issues/" + issue.id, {
         assignedToUserId: userId || null,
       })
       .catch(() => {
-        toast.error("changes coul not be saved.");
+        toast.error("changes could not be saved.");
       });
-      router.refresh();
+    router.refresh();
   };
 
   return (
