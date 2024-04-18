@@ -4,11 +4,12 @@ import { Issue, User } from "@prisma/client";
 import { Select } from "@radix-ui/themes";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
+import { useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 
 const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   const { data: users, error, isLoading } = useUsers();
-
+const router = useRouter();
   if (isLoading) return <Skeleton />;
 
   if (error) return null;
@@ -22,14 +23,15 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
   //   fetchUsers();
   // }, []);
 
-  const assignIssue = (userId: string) => {
-    axios
+  const assignIssue = async(userId: string) => {
+    await axios
       .patch("/api/issues/" + issue.id, {
         assignedToUserId: userId || null,
       })
       .catch(() => {
         toast.error("changes coul not be saved.");
       });
+      router.refresh();
   };
 
   return (
@@ -38,7 +40,7 @@ const AssigneeSelect = ({ issue }: { issue: Issue }) => {
         defaultValue={issue.assignedToUserId || ""}
         onValueChange={assignIssue}
       >
-        <Select.Trigger  />
+        <Select.Trigger />
         <Select.Content>
           <Select.Group>
             <Select.Label>Suggestions</Select.Label>
@@ -59,7 +61,7 @@ const useUsers = () =>
   useQuery<User[]>({
     queryKey: ["users"],
     queryFn: () => axios.get("/api/users").then((res) => res.data),
-    staleTime: 60 * 1000, // 60sec
+    staleTime: 10 * 1000, // 60sec
     retry: 3,
   });
 

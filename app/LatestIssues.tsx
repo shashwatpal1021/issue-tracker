@@ -1,7 +1,6 @@
 import prisma from "@/prisma/client";
 import { Avatar, Card, Flex, Heading, Table } from "@radix-ui/themes";
 import Link from "next/link";
-import React from "react";
 import { IssueStatusBadge } from "./components";
 
 const LatestIssues = async () => {
@@ -12,6 +11,7 @@ const LatestIssues = async () => {
       assignedToUser: true,
     },
   });
+
   return (
     <Card>
       <Heading size={"4"} mb="5">
@@ -44,7 +44,8 @@ const LatestIssues = async () => {
     </Card>
   );
 };
-
-export const dynamic = "force-dynamic";
+// export const dynamic = "force-dynamic";
+// export const revalidate = 0;
+// export const fetchCache = 'force-no-store'
 
 export default LatestIssues;

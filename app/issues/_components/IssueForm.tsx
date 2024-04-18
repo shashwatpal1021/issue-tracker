@@ -4,7 +4,7 @@ import Spinner from "@/app/components/Spinner";
 import { issueSchema } from "@/app/validationSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Issue } from "@prisma/client";
-import { Button, Callout, Select, TextField } from "@radix-ui/themes";
+import { Button, Callout, TextField } from "@radix-ui/themes";
 import axios from "axios";
 import "easymde/dist/easymde.min.css";
 import { useRouter } from "next/navigation";
@@ -48,10 +48,10 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
       setSubmiting(true);
       if (issue) {
         result = await axios.patch("/api/issues/" + issue.id, data);
-        console.log("patch ------->", result);
+        // console.log("patch ------->", result);
       } else {
         result = await axios.post("/api/issues/", data);
-        console.log("new issue ------->", result);
+        // console.log("new issue ------->", result);
       }
       router.push("/issues/list");
       router.refresh();
@@ -87,25 +87,25 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
           )}
         />
         <ErrorMessage>{errors.description?.message}</ErrorMessage>
-        <div className="flex justify-between">
+        <div className="flex justify-between border-none">
           {issue ? (
-            <div className="rounded-full border-black">
-              <Select.Root defaultValue={`${issue.status}` || "OPEN"}>
+            <div>
+              {/* <Select.Root defaultValue={`${issue.status}` || "OPEN"}>
                 <Select.Trigger />
-                <Select.Content>
-                  <Select.Group
-                    className="font-bold rounded-2"
-                    {...register("status", { required: true })}
-                  >
-                    <Select.Label>Status...</Select.Label>
-                    <Select.Item className="font-bold" value="OPEN">
-                      Open
-                    </Select.Item>
-                    <Select.Item value="IN_PROGRESS">In Progress</Select.Item>
-                    <Select.Item value="CLOSED">Closed</Select.Item>
-                  </Select.Group>
-                </Select.Content>
-              </Select.Root>
+                <Select.Content> */}
+              <select
+                className="font-bold rounded-2 bg-purple-400 text-white rounded-full border-none"
+                {...register("status", { required: true })}
+              >
+                {/* <Select.Label>Status...</Select.Label> */}
+                <option className="font-bold" value="OPEN">
+                  Open
+                </option>
+                <option value="IN_PROGRESS">In Progress</option>
+                <option value="CLOSED">Closed</option>
+              </select>
+              {/* </Select.Content> */}
+              {/* </Select.Root> */}
             </div>
           ) : (
             <div></div>
