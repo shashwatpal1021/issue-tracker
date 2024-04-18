@@ -44,7 +44,7 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
           color="gray"
           variant="soft"
           disabled={currentPage === 1}
-          onClick={() => changePage(currentPage - 1)}
+          onClick={() => changePage(currentPage-1)}
         >
           <ChevronLeftIcon />
         </Button>
@@ -60,7 +60,7 @@ const Pagination = ({ itemCount, pageSize, currentPage }: Props) => {
           color="gray"
           variant="soft"
           disabled={currentPage === pageCount}
-          onClick={() => changePage(currentPage)}
+          onClick={() => changePage(pageCount)}
         >
           <DoubleArrowRightIcon />
         </Button>
