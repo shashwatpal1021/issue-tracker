@@ -20,3 +20,11 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 
 
+User will landed to the Dashboard where user can see the statics through the graph where how many issues are open, in progress or done and he will able to see the latest issues created or assigned to some one. he will to see the issues as well but he will not able to update or create a new issue or assigned to some.
+
+user can also sort via issue, status or created by click by it.
+
+Hi Folks I have been created a web app called issue-tracker where user can login with google authorization.
+
+after login through the google oauth user will able to create a new issues and able to edit an assigne to someone how are the part on the issue tracker.
+
