@@ -20,11 +20,16 @@ This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-opti
 
 
 
-User will landed to the Dashboard where user can see the statics through the graph where how many issues are open, in progress or done and he will able to see the latest issues created or assigned to some one. he will to see the issues as well but he will not able to update or create a new issue or assigned to some.
+The user will land on the dashboard, where he may view the most recent issues produced or assigned to someone, as well as data via the graph, such as the number of issues that are open, in progress, or completed. Though he won't be able to edit, add a new problem, or designate it to someone, he will still be able to see the issues. By clicking on it, the user may also sort by issue, status, or creation. 
 
-user can also sort via issue, status or created by click by it.
+Hello everyone Issue Tracker  that allows users to log in using Google permission. The user may add new issues to the issue tracker, update existing ones, and assign tasks to other users after checking in using Google OAuth.
 
-Hi Folks I have been created a web app called issue-tracker where user can login with google authorization.
+looking for your suggestion to add some feature based on requirement.
 
-after login through the google oauth user will able to create a new issues and able to edit an assigne to someone how are the part on the issue tracker.
 
+![alt text](./images/Dashboard_without_login.png)
+![alt text](./images/login_with_user_dashborad.png)
+![alt text](./images/issues_with_filter_and_sorted_by_status.png)
+![alt text](./images/edit_assignable_delete.png)
+![alt text](./images/deletion.png)
+![alt text](./images/edit_and_change_status.png)
