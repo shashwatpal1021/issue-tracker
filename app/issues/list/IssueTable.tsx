@@ -18,7 +18,7 @@ interface Props {
   issues: Issue[];
 }
 const IssueTable = async ({ searchParams, issues }: Props) => {
-  
+
   return (
     <>
       <Table.Root variant="surface">
@@ -46,8 +46,8 @@ const IssueTable = async ({ searchParams, issues }: Props) => {
             ))}
           </Table.Row>
         </Table.Header>
-        
-        {/* <Table.Body>
+
+        <Table.Body>
           {issues.map((issue) => (
             <Table.Row key={issue.id}>
               <Table.Cell>
@@ -64,7 +64,7 @@ const IssueTable = async ({ searchParams, issues }: Props) => {
               </Table.Cell>
             </Table.Row>
           ))}
-        </Table.Body> */}
+        </Table.Body>
       </Table.Root>
     </>
   );
@@ -75,18 +75,18 @@ const columns: {
   value: keyof Issue;
   className?: string;
 }[] = [
-  { label: "Issue", value: "title" },
-  {
-    label: "Status",
-    value: "status",
-    className: "hidden md:table-cell",
-  },
-  {
-    label: "Created",
-    value: "createdAt",
-    className: "hidden md:table-cell",
-  },
-];
+    { label: "Issue", value: "title", className: "hover:text-purple-700" },
+    {
+      label: "Status",
+      value: "status",
+      className: "hidden md:table-cell hover:text-purple-700",
+    },
+    {
+      label: "Created",
+      value: "createdAt",
+      className: "hidden md:table-cell hover:text-purple-700",
+    },
+  ];
 
 export const columnNames = columns.map((column) => column.value);
 
