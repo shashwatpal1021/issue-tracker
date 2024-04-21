@@ -25,21 +25,21 @@ export async function POST(request: NextRequest) {
   return NextResponse.json(newIssue, { status: 201 });
 }
 
-export async function GET(request: NextRequest) {
-  const session = await getServerSession(authOptions);
-  if (!session) {
-    return NextResponse.json({}, { status: 401 });
-  }
-  const user = await prisma.user.findUnique({
-    where: {
-      email: session?.user?.email,
-    },
-  });
-  const issues = await prisma.issue.findMany({
-    where: {
-      assignedToUserId: user?.id,
-    },
-  });
-  console.log("issues in side api/issues", issues);
-  return NextResponse.json(issues, { status: 200 });
-}
+// export async function GET(request: NextRequest) {
+//   const session = await getServerSession(authOptions);
+//   if (!session) {
+//     return NextResponse.json({}, { status: 401 });
+//   }
+//   const user = await prisma.user.findUnique({
+//     where: {
+//       email: session?.user?.email,
+//     },
+//   });
+//   const issues = await prisma.issue.findMany({
+//     where: {
+//       assignedToUserId: user?.id,
+//     },
+//   });
+//   console.log("issues in side api/issues", issues);
+//   return NextResponse.json(issues, { status: 200 });
+// }
