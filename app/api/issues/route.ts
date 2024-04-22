@@ -1,4 +1,4 @@
-import { Session } from "@/app/getServerSession";
+import { Session } from "@/app/utils/getServerSession";
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { issueSchema } from "../../validationSchema";
@@ -24,21 +24,3 @@ export async function POST(request: NextRequest) {
   }
 }
 
-export async function MyIssues() {
-  const session = await Session();
-  // console.log("session", session)
-  if (session) {
-    const user = await prisma.user.findUnique({
-      where: {
-        email: session?.user?.email,
-      },
-    });
-    const issues = await prisma.issue.findMany({
-      where: {
-        assignedToUserId: user?.id,
-      },
-    });
-    // console.log("issues in side api/issues", issues);
-    return issues;
-  }
-}

@@ -3,13 +3,9 @@ import prisma from "@/prisma/client";
 import { Issue, Status } from "@prisma/client";
 import { Flex } from "@radix-ui/themes";
 import { Metadata } from "next";
-import IssueActions from "./IssueActions";
-import IssueTable, { columnNames, IssueQuery } from "./IssueTable";
-import { useSession } from "next-auth/react";
-// import { useState } from "react";
-import { MyIssues } from "@/app/api/issues/route";
+import { columnNames, IssueQuery } from "./IssueTable";
+import { MyIssues } from "@/app/utils/MyIssues";
 import OptionTable from "./optionTable";
-// import { useState } from "react";
 
 interface Props {
   // searchParams: { status: Status; orderBy: keyof Issue; page: string };
@@ -36,7 +32,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
     skip: (page - 1) * pageSize,
     take: pageSize,
   });
-  const data=await MyIssues();
+  const data: any = await MyIssues();
   const issueCount = await prisma.issue.count({ where });
   // await delay(2000);
   return (

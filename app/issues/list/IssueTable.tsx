@@ -1,5 +1,4 @@
 "use ";
-import { MyIssues } from "@/app/api/issues/route";
 import { IssueStatusBadge } from "@/app/components";
 import { Issue, Status } from "@prisma/client";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
@@ -15,7 +14,6 @@ interface Props {
   searchParams: IssueQuery;
   issues: Issue[];
 }
-const data = MyIssues();
 const IssueTable = async ({ searchParams, issues }: Props) => {
  
   return (
