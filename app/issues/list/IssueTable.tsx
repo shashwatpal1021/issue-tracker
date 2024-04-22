@@ -1,4 +1,4 @@
-"use "
+"use ";
 import { MyIssues } from "@/app/api/issues/route";
 import { IssueStatusBadge } from "@/app/components";
 import prisma from "@/prisma/client";
@@ -19,16 +19,11 @@ export interface IssueQuery {
 interface Props {
   searchParams: IssueQuery;
   issues: Issue[];
+  // data: Issue[];
 }
 const data = MyIssues();
 const IssueTable = async ({ searchParams, issues }: Props) => {
-  // const issues = ()=>{
-  //   if (isIssue){
-  //     return issue
-  //   }
-  //   return data
-  // }
-  // const [isIssue, setIsIssue] = useState(false);
+ 
   // const _DATA: Issue[] = isIssue ? data : issues;
   return (
     <>

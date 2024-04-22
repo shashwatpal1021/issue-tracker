@@ -1,12 +1,14 @@
-
 import Pagination from "@/app/components/Pagination";
 import prisma from "@/prisma/client";
-import { Status } from "@prisma/client";
+import { Issue, Status } from "@prisma/client";
 import { Flex } from "@radix-ui/themes";
 import { Metadata } from "next";
 import IssueActions from "./IssueActions";
 import IssueTable, { columnNames, IssueQuery } from "./IssueTable";
 import { useSession } from "next-auth/react";
+// import { useState } from "react";
+import { MyIssues } from "@/app/api/issues/route";
+import OptionTable from "./optionTable";
 // import { useState } from "react";
 
 interface Props {
@@ -34,21 +36,15 @@ const IssuesPage = async ({ searchParams }: Props) => {
     skip: (page - 1) * pageSize,
     take: pageSize,
   });
-
+  // const {data: Issue[]} = MyIssues();
+  const data=await MyIssues();
+  // console.log("main--------------", data,"============",issues);
   const issueCount = await prisma.issue.count({ where });
   // await delay(2000);
-  // const [isIssue, setIsIssue] = useState(false);
-  // const handleClick = async () => {
-  //   setIsIssue((prev) => !prev);
-  //   console.log(isIssue);
-  // };
   return (
     <>
       <Flex direction="column" gap="3">
-        <IssueTable
-          searchParams={searchParams}
-          issues={issues}
-        />
+        <OptionTable searchParams={searchParams} issues={issues} data={data} />
         <Pagination
           pageSize={pageSize}
           currentPage={page}
