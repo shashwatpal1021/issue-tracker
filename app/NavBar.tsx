@@ -4,8 +4,16 @@ import { usePathname } from "next/navigation";
 import React from "react";
 import { AiFillBug } from "react-icons/ai";
 import classnames from "classnames";
-import { useSession } from "next-auth/react";
-import { Box, Flex, Container, DropdownMenu, Avatar, Text } from "@radix-ui/themes";
+import { signIn, signOut, useSession } from "next-auth/react";
+import {
+  Box,
+  Flex,
+  Container,
+  DropdownMenu,
+  Avatar,
+  Text,
+  Button,
+} from "@radix-ui/themes";
 import { Skeleton } from "./components";
 
 const NavBar = () => {
@@ -28,32 +36,32 @@ const NavBar = () => {
 
 const AuthStatus = () => {
   const { status, data: session } = useSession();
-  if (status === "loading") return <Skeleton width={'5rem'} />;
+  if (status === "loading") return <Skeleton width={"5rem"} />;
   if (status === "unauthenticated") {
-    return (<Link className="nav-link" href={'/api/auth/signin'}>Login</Link>);
+    return <Button onClick={() => signIn("google")}>Login</Button>;
   }
   return (
     <Box>
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger>
-        <Avatar src={session!.user!.image!} fallback="?"
-          size={'2'}
-          radius="full"
-          className="cursor-pointer"
-        // referrerPolicy="no-referrer"
-        />
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Content>
-        <DropdownMenu.Label>
-          <Text size={'2'}>
-            {session!.user!.email}
-          </Text>
-        </DropdownMenu.Label>
-        <DropdownMenu.Item>
-          <Link href={"/api/auth/signout"}>Log out</Link>
-        </DropdownMenu.Item>
-      </DropdownMenu.Content>
-    </DropdownMenu.Root>
+      <DropdownMenu.Root>
+        <DropdownMenu.Trigger>
+          <Avatar
+            src={session!.user!.image!}
+            fallback="?"
+            size={"2"}
+            radius="full"
+            className="cursor-pointer"
+            // referrerPolicy="no-referrer"
+          />
+        </DropdownMenu.Trigger>
+        <DropdownMenu.Content>
+          <DropdownMenu.Label>
+            <Text size={"2"}>{session!.user!.email}</Text>
+          </DropdownMenu.Label>
+          <DropdownMenu.Item onClick={() => signOut()}>
+            <div>Log Out</div>
+          </DropdownMenu.Item>
+        </DropdownMenu.Content>
+      </DropdownMenu.Root>
     </Box>
   );
 };

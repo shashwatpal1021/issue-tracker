@@ -42,7 +42,7 @@ const IssueForm = ({ issue }: { issue?: Issue }) => {
   const [isSubmiting, setSubmiting] = useState(false);
 
   const onSubmit = handleSubmit(async (data) => {
-    console.log("data------------", data);
+    // console.log("data------------", data);
     try {
       let result;
       setSubmiting(true);

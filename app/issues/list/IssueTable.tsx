@@ -1,11 +1,14 @@
-
+"use "
+import { MyIssues } from "@/app/api/issues/route";
 import { IssueStatusBadge } from "@/app/components";
+import prisma from "@/prisma/client";
+import { Issue, Status } from "@prisma/client";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { Table } from "@radix-ui/themes";
-import Link from "next/link";
-import NextLink from "next/link";
-import { Issue, Status, User } from "@prisma/client";
-
+import { useSession } from "next-auth/react";
+import { default as Link, default as NextLink } from "next/link";
+import IssueActions from "./IssueActions";
+import { useState } from "react";
 
 export interface IssueQuery {
   status: Status;
@@ -17,10 +20,20 @@ interface Props {
   searchParams: IssueQuery;
   issues: Issue[];
 }
+const data = MyIssues();
 const IssueTable = async ({ searchParams, issues }: Props) => {
-
+  // const issues = ()=>{
+  //   if (isIssue){
+  //     return issue
+  //   }
+  //   return data
+  // }
+  // const [isIssue, setIsIssue] = useState(false);
+  // const _DATA: Issue[] = isIssue ? data : issues;
   return (
     <>
+      {/* <IssueActions onChange={() => setIsIssue(!isIssue)} /> */}
+
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
@@ -46,7 +59,6 @@ const IssueTable = async ({ searchParams, issues }: Props) => {
             ))}
           </Table.Row>
         </Table.Header>
-
         <Table.Body>
           {issues.map((issue) => (
             <Table.Row key={issue.id}>
@@ -75,18 +87,18 @@ const columns: {
   value: keyof Issue;
   className?: string;
 }[] = [
-    { label: "Issue", value: "title",  className: "hover:text-purple-700"},
-    {
-      label: "Status",
-      value: "status",
-      className: "hidden md:table-cell hover:text-purple-700",
-    },
-    {
-      label: "Created",
-      value: "createdAt",
-      className: "hidden md:table-cell hover:text-purple-700",
-    },
-  ];
+  { label: "Issue", value: "title" },
+  {
+    label: "Status",
+    value: "status",
+    className: "hidden md:table-cell",
+  },
+  {
+    label: "Created",
+    value: "createdAt",
+    className: "hidden md:table-cell",
+  },
+];
 
 export const columnNames = columns.map((column) => column.value);
 
