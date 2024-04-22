@@ -24,5 +24,4 @@ const OptionTable = ({ searchParams, issues, data }: Props) => {
     </>
   );
 };
-
 export default OptionTable;

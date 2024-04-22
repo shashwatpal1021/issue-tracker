@@ -1,10 +1,9 @@
 "use client";
 import { Button, Flex } from "@radix-ui/themes";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import IssueStatusFilter from "./IssueStatusFilter";
 import MyIssue from "./MyIssue";
-import { useSession } from "next-auth/react";
-// import { useState } from "react";
 
 interface Props {
   handleClick: () => void;

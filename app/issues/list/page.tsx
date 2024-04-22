@@ -36,9 +36,7 @@ const IssuesPage = async ({ searchParams }: Props) => {
     skip: (page - 1) * pageSize,
     take: pageSize,
   });
-  // const {data: Issue[]} = MyIssues();
   const data=await MyIssues();
-  // console.log("main--------------", data,"============",issues);
   const issueCount = await prisma.issue.count({ where });
   // await delay(2000);
   return (

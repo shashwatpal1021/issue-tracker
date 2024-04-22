@@ -1,34 +1,25 @@
 "use ";
 import { MyIssues } from "@/app/api/issues/route";
 import { IssueStatusBadge } from "@/app/components";
-import prisma from "@/prisma/client";
 import { Issue, Status } from "@prisma/client";
 import { ArrowUpIcon } from "@radix-ui/react-icons";
 import { Table } from "@radix-ui/themes";
-import { useSession } from "next-auth/react";
 import { default as Link, default as NextLink } from "next/link";
-import IssueActions from "./IssueActions";
-import { useState } from "react";
 
 export interface IssueQuery {
   status: Status;
   orderBy: keyof Issue;
   page: string;
 }
-
 interface Props {
   searchParams: IssueQuery;
   issues: Issue[];
-  // data: Issue[];
 }
 const data = MyIssues();
 const IssueTable = async ({ searchParams, issues }: Props) => {
  
-  // const _DATA: Issue[] = isIssue ? data : issues;
   return (
     <>
-      {/* <IssueActions onChange={() => setIsIssue(!isIssue)} /> */}
-
       <Table.Root variant="surface">
         <Table.Header>
           <Table.Row>
