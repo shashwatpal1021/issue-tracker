@@ -7,16 +7,16 @@ import { useSession } from "next-auth/react";
 // import { useState } from "react";
 
 interface Props {
-  onChange: () => void;
+  handleClick: () => void;
 }
-const IssueActions = ({ onChange }: Props) => {
+const IssueActions = ({ handleClick }: Props) => {
   const { data: session } = useSession();
 
   return (
     <Flex justify={"between"}>
       <Flex gap="2">
         <IssueStatusFilter />
-        {session && <MyIssue onChange={onChange} />}
+        {session && <MyIssue handleClick={handleClick} />}
       </Flex>
       {session && (
         <Button>

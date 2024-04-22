@@ -40,7 +40,7 @@ export async function MyIssues() {
         assignedToUserId: user?.id,
       },
     });
-    console.log("issues in side api/issues", issues);
+    // console.log("issues in side api/issues", issues);
     return issues;
   }
 }
