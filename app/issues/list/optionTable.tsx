@@ -10,7 +10,7 @@ interface Props {
   data: Issue[];
 }
 
-const OptionTable =  ({ searchParams, issues, data }: Props) => {
+const OptionTable = ({ searchParams, issues, data }: Props) => {
   const [isIssue, setIsIssue] = useState(false);
   const handleClick = () => setIsIssue((prev) => !prev);
   return (
