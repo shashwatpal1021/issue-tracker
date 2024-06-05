@@ -15,7 +15,7 @@ const IssueActions = ({ handleClick }: Props) => {
     <Flex justify={"between"}>
       <Flex gap="2">
         <IssueStatusFilter />
-        {session && <MyIssue handleClick={handleClick} />}
+        {/* {session && <MyIssue handleClick={handleClick} />} */}
       </Flex>
       {session && (
         <Button>
