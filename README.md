@@ -1,6 +1,5 @@
 ## Getting Started
-
-deployed in vercel link : https://issue-tracker-umber-delta.vercel.app/
+ https://issue-tracker-umber-delta.vercel.app/
 
 First, run the development server:
 
